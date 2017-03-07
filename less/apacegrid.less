@@ -1,0 +1,174 @@
+
+/**********************************
+
+   ----- // ApaceGrid \\ -----
+  A less grid for the Apace MVC
+
+**********************************/
+
+/* Base config */
+html, body {
+	width: 100%;
+}
+* {
+	margin: 0px;
+}
+h1,h2,h3,h4,h5 {
+	font-weight: normal;
+}
+
+
+/* Mawidth of container */
+@container-maxwidth  : 1200px;
+@maxwidth-breakpoint : (@container-maxwidth + 20);
+
+/*
+	// Three breakpoints - Large, medium and small,
+	// count from 0 and upwards when setting these
+*/
+
+/* Small / SM - Phone */
+/* Where to break to Phone size    > */
+@breakPoint-phone   :  0px;
+
+/* Medium / MD - Tablets */
+/* Where to break to Tablet size   > */
+@breakPoint-tablet  :  768px;
+
+/* Large / LG - Desktop */
+/* Where to break to Desktop size  >*/
+@breakPoint-desktop :  1024px;
+
+/* Declare media queries */
+@phone:     ~"only screen and (min-width: @{breakPoint-phone}   ) and (max-width: @{breakPoint-tablet}) ";
+@tablet:    ~"only screen and (min-width: @{breakPoint-tablet}  ) and (max-width: @{breakPoint-desktop}) ";	
+@desktop:   ~"only screen and (min-width: @{breakPoint-desktop} ) ";
+
+@desktop-maxwidth:   ~"only screen and (min-width: @{maxwidth-breakpoint} ) ";
+
+
+/* Classes */
+.container:after {
+    content:'';
+    display:block;
+    clear: both;
+}
+
+.container {
+	max-width: @container-maxwidth;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+
+	&.fluid {
+		max-width: 100%;
+	}
+
+	/* After each .row class we clear */
+	.row:after {
+	    content:'';
+	    display:block;
+	    clear: both;
+	    visibility: hidden;
+	}
+	
+	/* Each '.col' */
+	div[class^="col"] {
+		float: left;
+	}
+
+	.row {
+
+		/* Each '.col' child inside .row */
+		div[class^="col"] {
+			box-sizing: border-box;
+			padding: 10px;
+		}
+
+	}
+}
+
+
+/* -- Large / LG - Desktop -- Medium / MD - Tablets -- */
+/* 
+	// If only one size is set, for example ( col-lg-* ) is set, go with that setting no matter the screen size,
+	// keep these settings above the -- Media Queries -- so it will be owerwritten by -- Media Queries -- (if class exists)
+*/
+
+@import "col-lg-static.less";
+@import "col-md-static.less";
+
+
+/* -- Media queries -- */
+
+/* Small / SM - Phone */
+@media @phone {
+	@import "col-sm.less";
+
+	.hidden-sm {
+		display: none;
+	}
+
+	/* Text elements */
+	h1 {
+		font-size: 28px;
+
+		&.title {
+			font-size: 54px;
+		}
+	}
+}
+
+/* Medium / MD - Tablets */
+@media @tablet {
+	@import "col-md.less";
+
+	.hidden-md {
+		display: none;
+	}
+
+	/* Text elements */
+	h1 {
+		font-size: 32px;
+
+		&.title {
+			font-size: 58px;
+		}
+	}
+}
+
+/* Large / LG - Desktop */
+@media @desktop {
+	@import "col-lg.less";
+
+	.hidden-lg {
+		display: none;
+	}
+
+	/* Text elements */
+	h1 {
+		font-size: 36px;
+
+		&.title {
+			font-size: 62px;
+		}
+	}
+}
+
+/* Desktop maxwidth */
+@media @desktop-maxwidth {
+	.container {
+		.row {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+
+		&.fluid {
+			.row {
+				margin-left: 0px;
+				margin-right: 0px;
+			}
+		}
+	}
+
+}
